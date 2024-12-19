@@ -1,0 +1,101 @@
+{% extends 'frontoffice.html.twig' %}
+
+{% block title %}Post {{ post.id }}{% endblock %}
+
+{% block body %}
+    <div class="d-flex flex-row-reverse">
+        <a href="{{ path('app_post_list') }}" class="genric-btn info circle text-end">Return to list</a>
+    </div>
+    <hr>
+    <div class="row justify-content-center">
+        <div class="col-8 single-exhibition justify-content-center">
+            <div class="thumb">
+                <img class="img-fluid" src="{{ asset('' ~ post.image) }}" alt="Post Image">
+            </div>
+            <p class="date text-disabled font-weight-light">{{ post.timestamp|date('Y-m-d H:i:s') }}</p>
+            <h4 class="font-weight-normal">
+                {{ post.contenu }}
+            </h4>
+            <div class="meta-bottom d-flex justify-content-end">
+                {% if post.author.id == current_user %}
+                    <a href="{{ path('app_post_edit', {'id': post.id}) }}" class="m-2 genric-btn primary">Edit</a>
+                    <a href="{{ path('app_post_delete', {'id': post.id}) }}" class="m-2 genric-btn info radius">Delete</a>
+                {% endif %}
+                <a href="{{ path('app_post_show', {'id': post.id}) }}" class="m-2 genric-btn success">View</a>
+                <a href="{{ path('app_post_like', {'id': post.id}) }}" class="m-2 btn btn-danger">{{ post.nbLike }}
+                    ♥</a>
+                <button class="m-2 genric-btn warning" onclick="translatePost('{{ post.contenu }}')">Translate</button>
+            </div>
+            <br>
+            <hr>
+            <h4>Comments</h4>
+            {% for comment in comments %}
+                <div class="row flex-column">
+                    <div class="comment-list">
+                        <div class="single-comment justify-content-between d-flex" id="comment-{{ comment.id }}">
+                            <div class="user justify-content-between d-flex">
+                                <div class="thumb w-25 mr-5">
+                                    <img class=" img-fluid" src="https://static-00.iconduck.com/assets.00/profile-default-icon-2048x2045-u3j7s5nj.png" alt="Photo Profile">
+                                </div>
+                                <div class="ml-5 desc w-75">
+                                    <h5>
+                                        <a href="#">{{ comment.utilisateur }}</a>
+                                    </h5>
+                                    <p class="date">{{ comment.timestamp|date('Y-m-d H:i:s') }}</p>
+                                    <p class="comment">
+                                        {{ comment.valeur }}
+                                    </p>
+                                    <button class="genric-btn warning" onclick="translateComment('{{ comment.valeur }}', {{ comment.id }})">Translate</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <form action="{{ path('app_post_comment_add', {'id': post.id}) }}" method="POST">
+                <div class="d-flex">
+                    <input type="text" name="comment" placeholder="Comment" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Comment'" required="" class="border border-dark badge-pill form-control single-input-primary mr-5">
+                    <button type="submit" href="#" class="ml-5 genric-btn success circle arrow">Send<span class="lnr lnr-arrow-right"></span></button>
+                </div>
+            </form>
+            <br>
+        </div>
+    </div>
+    <script>
+        function translatePost(text) {
+            // Implement AJAX to call Symfony route for translating post content
+            $.ajax({
+                url: '/post/translate',
+                method: 'POST',
+                data: { text: text },
+                success: function(response) {
+                    // Update UI with translated text returned from Symfony
+                    console.log(response.translatedText);
+                    // Example: Update post content with translated text
+                    $('.font-weight-normal').text(response.translatedText);
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        }
+
+        function translateComment(text, commentId) {
+            // Implement AJAX to call Symfony route for translating comment content
+            $.ajax({
+                url: '/post/translate',
+                method: 'POST',
+                data: { text: text },
+                success: function(response) {
+                    // Update UI with translated text returned from Symfony
+                    console.log(response.translatedText);
+                    // Example: Update comment content with translated text
+                    $('#comment-' + commentId + ' .comment').text(response.translatedText);
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        }
+    </script>
+{% endblock %}

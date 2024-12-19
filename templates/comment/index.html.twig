@@ -1,0 +1,40 @@
+{% extends 'baseAl.html.twig' %}
+
+{% block child %}
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="#" style="color: #2c4d43";>Comments</a>
+</nav>
+<div style="margin-left: 50px; margin-right: 50px;">
+
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Text</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for comment in comments %}
+            <tr>
+                <td>{{ comment.id }}</td>
+                <td>{{ comment.text }}</td>
+                <td>
+                    <button class="btn btn-light" onclick="window.location.href='{{ path('app_comment_show', {'id': comment.id}) }}'">Show</button>
+
+                    <button class="btn btn-light" onclick="window.location.href='{{ path('app_comment_edit', {'id': comment.id}) }}'">Edit</button>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <button class="btn btn-light" onclick="window.location.href='{{ path('app_event_index') }}'">Back to list</button>
+
+</div>
+{% endblock %}

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zxx" class="no-js">
+<head>
+    <!-- Mobile Specific Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="img/fav.png">
+    <!-- Author Meta -->
+    <meta name="author" content="codepixer">
+    <!-- Meta Description -->
+    <meta name="description" content="">
+    <!-- Meta Keyword -->
+    <meta name="keywords" content="">
+    <!-- meta character set -->
+    <meta charset="UTF-8">
+    <!-- Site Title -->
+    <title>Art Museum</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+    <!--
+    CSS
+    ============================================= -->
+    <link rel="stylesheet" href="{{ asset('assets-front/css/linearicons.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets-front/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets-front/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets-front/css/magnific-popup.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets-front/css/nice-select.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets-front/css/animate.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets-front/css/owl.carousel.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets-front/css/main.css') }}">
+</head>
+<body>
+<header id="header" id="home">
+    <div class="container header-top">
+        <div class="row">
+            <div class="col-6 top-head-left">
+                <ul>
+                    <li><a href="#">Visit Us</a></li>
+                    <li><a href="#">Buy Ticket</a></li>
+                </ul>
+            </div>
+            <div class="col-6 top-head-right">
+                <ul>
+                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                    <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="container">
+        <div class="row align-items-center justify-content-between d-flex">
+            <div id="logo">
+                <a href="index.html"><img src="{{ asset('assets-front/img/logo.png') }}" alt="" title="" /></a>
+            </div>
+            <nav id="nav-menu-container">
+                <ul class="nav-menu">
+                    <li class="menu-active"><a href="index.html">Home</a></li>
+                    {% if app.user %}
+                    <li><a href="{{ path('app_Profile') }}">Profile</a></li>
+                    {% endif %}
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Gallery</a></li>
+                    <li><a href="#">Events</a></li>
+                    <li><a href="#">Ticket</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Contact</a></li>
+                    
+                    <li class="menu-has-children"><a href="">Pages</a>
+                        <ul>
+                            <li><a href="#">Blog Single</a></li>
+                            <li><a href="#">Category</a></li>
+                            <li><a href="#">Elements</a></li>
+                        </ul>
+                    </li>
+                       {% if app.user %}
+                    <li><a href="{{ path('app_logout') }}">Logout</a></li>
+                      {% endif %}
+                </ul>
+                
+            </nav><!-- #nav-menu-container -->
+        </div>
+    </div>
+</header><!-- #header -->
+
+<div class="container" style="padding-top:23%">
+<center><h1 style="color:#88d200">Personal Information</h1></center><br><br>
+    <div class="row">
+        <div class="col-6  row align-items-center">
+         <div class="col-6">         <img style="width:100px; border-radius:30px" src="{{ asset('assets-back/img/bruce-mars.jpg') }}" alt="profile_image" class=" border-radius-lg shadow-sm">
+</div>
+         <div class="col-6">
+                    <h5 class="mb-1" >
+                        <span>Name:</span><span style="color:#88d200">&nbsp;&nbsp;  {{ user.nom }} </span>
+                    </h5>
+                    <h5 class="mb-1">
+                      <span>Role:</span><span style="color:#88d200"> &nbsp;&nbsp;  {{ user.role }}</span>
+                        
+                    </h5>
+                </div>
+        </div>
+        <div class="col-6">
+               
+                <ul class="list-group">
+               <h5 class="mb-1" >
+                        <span>Full Name:</span><span style="color:#88d200">&nbsp;&nbsp;  {{ user.nom }} {{ user.prenom }}</span>
+                    </h5><br>
+                     <h5 class="mb-1" >
+                        <span>Mobile:</span><span style="color:#88d200">&nbsp;&nbsp;  {{ user.numTel }}</span>
+                    </h5><br>
+                    <h5 class="mb-1" >
+                        <span>Email:</span><span style="color:#88d200">&nbsp;&nbsp;  {{ user.email }}</span>
+                    </h5><br>
+                     <h5 class="mb-1" >
+                        <span>Status:</span><span style="color:#88d200">&nbsp;&nbsp;  {% if user.isVerified == 1  %}
+                                        <span class="badge badge-sm p-2 bg-gradient-success">{{ user.isVerified ? 'Verified' : 'Not verified' }}</span>
+                                    {% else %}
+                                        <span class="badge badge-sm bg-gradient-danger">{{ user.isVerified ? 'Verified' : 'Not verified' }}</span>
+                                    {% endif %}</span>
+                    </h5>
+                               
+                               
+                            </ul>
+        </div>
+    </div><br><br><br>
+    <form action="{{ path('app_edit', {'id': user.id}) }}"><center> <button class="click-btn btn btn-default" style="background-color:#88d200;color:white">Edit</button></center></form>
+   
+</div>
+
+<!-- start footer Area -->
+<footer class="footer-area section-gap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 col-md-6 col-sm-6">
+                <div class="single-footer-widget">
+                    <h6>About Us</h6>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua.
+                    </p>
+                    <p class="footer-text">
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> and distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-5  col-md-6 col-sm-6">
+                <div class="single-footer-widget">
+                    <h6>Newsletter</h6>
+                    <p>Stay update with our latest</p>
+                    <div class="" id="mc_embed_signup">
+                        <form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="form-inline">
+                            <input class="form-control" name="EMAIL" placeholder="Enter Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '" required="" type="email">
+                            <button class="click-btn btn btn-default"><span class="lnr lnr-arrow-right"></span></button>
+                            <div style="position: absolute; left: -5000px;">
+                                <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
+                            </div>
+
+                            <div class="info"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-6 col-sm-6 social-widget">
+                <div class="single-footer-widget">
+                    <h6>Follow Us</h6>
+                    <p>Let us be social</p>
+                    <div class="footer-social d-flex align-items-center">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-dribbble"></i></a>
+                        <a href="#"><i class="fa fa-behance"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- End footer Area -->
+
+
+<script src="{{ asset('assets-front/js/vendor/jquery-2.2.4.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="{{ asset('assets-front/js/vendor/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+<script src="{{ asset('assets-front/js/easing.min.js') }}"></script>
+<script src="{{ asset('assets-front/js/hoverIntent.js') }}"></script>
+<script src="{{ asset('assets-front/js/superfish.min.js') }}"></script>
+<script src="{{ asset('assets-front/js/jquery.ajaxchimp.min.js') }}"></script>
+<script src="{{ asset('assets-front/js/jquery.magnific-popup.min.js') }}"></script>
+<script src="{{ asset('assets-front/js/owl.carousel.min.js') }}"></script>
+<script src="{{ asset('assets-front/js/imagesloaded.pkgd.min.js') }}"></script>
+<script src="{{ asset('assets-front/js/justified.min.js') }}"></script>
+<script src="{{ asset('assets-front/js/jquery.sticky.js') }}"></script>
+<script src="{{ asset('assets-front/js/jquery.nice-select.min.js') }}"></script>
+<script src="{{ asset('assets-front/js/parallax.min.js') }}"></script>
+<script src="{{ asset('assets-front/js/mail-script.js') }}"></script>
+<script src="{{ asset('assets-front/js/main.js') }}"></script>
+</body>
+</html>

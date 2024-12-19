@@ -1,0 +1,25 @@
+{% extends 'baseAl.html.twig' %}
+
+{% block title %}Edit Comment{% endblock %}
+
+{% block child %}
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="#" style="color: #2c4d43";>New comment</a>
+</nav>
+<div style="margin-left: 20px; margin-right: 20px;">
+
+
+{{ include('comment/_form.html.twig', {
+    'button_label': 'Update',
+    'attr': {
+        'class': 'btn btn-dark'
+
+    }
+})}}
+
+
+    {{ include('comment/_delete_form.html.twig') }}
+    <button onclick="window.location.href='{{ path('app_comment_index') }}'" class="btn btn-light">Back to list</button>
+
+</div>
+{% endblock %}

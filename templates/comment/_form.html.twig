@@ -1,0 +1,11 @@
+{{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+<div class="form-group">
+    {{ form_label(form.text, 'text', {'label_attr': {'class': 'control-label'}}) }}
+    {{ form_widget(form.text, {'attr': {'class': 'form-control', 'id': 'exampleFormControlTextarea1', 'rows': 3}}) }}
+    {{ form_errors(form.text) }}
+
+</div>
+
+
+<button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

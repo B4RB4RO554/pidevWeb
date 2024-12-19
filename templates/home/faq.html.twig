@@ -1,0 +1,55 @@
+{% extends 'baseAl.html.twig' %}
+
+
+{% block body %}
+{{ parent() }}
+{% endblock %}
+
+{% block child %}
+<section>
+<div class="services">
+    <div>
+    <img src={{ asset("front/images/faq.jpg")}} alt="services" />
+    <h1>FAQ </h1>    
+    </div>
+    </div>
+    <div class="accordion-container">
+<button class="accordion">À QUOI SERT CETTE APPLICATION ?</button>
+<div class="panel">
+  <p>Cette application vise à aider les gens à réduire leurs déchets et à mener une vie plus durable en leur fournissant des conseils, des astuces et des outils pour suivre leur production de déchets.</p>
+</div>
+
+<button class="accordion">COMMENT L'APPLICATION SUIT-ELLE LA PRODUCTION DE DÉCHETS ?</button>
+<div class="panel">
+  <p>L'application permet aux utilisateurs de saisir des informations sur leur production de déchets, telles que la quantité de déchets produits chaque jour, et leur fournit des informations et des recommandations en fonction de ces données.</p>
+</div>
+
+<button class="accordion">L'APPLICATION EST-ELLE GRATUITE À UTILISER ?</button>
+<div class="panel">
+  <p>Oui, l'application est actuellement proposée gratuitement, bien qu'il puisse y avoir des fonctionnalités ou des services premium disponibles moyennant un coût à l'avenir.</p>
+</div>
+    </div>
+  
+</section>
+<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    /* Toggle between adding and removing the "active" class,
+    to highlight the button that controls the panel */
+    this.classList.toggle("active");
+
+    /* Toggle between hiding and showing the active panel */
+    var panel = this.nextElementSibling;
+    if (panel.style.display === "block") {
+      panel.style.display = "none";
+    } else {
+      panel.style.display = "block";
+    }
+  });
+}
+
+</script>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'baseAl.html.twig' %}
+
+{% block title %}Comment{% endblock %}
+
+{% block child %}
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#" style="color: #2c4d43";>Comment</a>
+    </nav>
+
+
+
+    <div class="row d-flex justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow-0 border" style="background-color: #f0f2f5;">
+            <div class="card-body p-4">
+
+                <div class="card mb-4">
+                    <div class="card-body">
+
+
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex flex-row align-items-center">
+
+                                <p class="small mb-0 ms-2">{{ comment.text }}</p>
+                            </div>
+                            <div class="d-flex flex-row align-items-center">
+
+                                <i class="far fa-thumbs-up mx-2 fa-xs text-black" style="margin-top: -0.16rem;"></i>
+                                <p class="small text-muted mb-0">{{ comment.id }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+    </div>
+<br/>
+
+    <div class="d-flex justify-content-center">
+        {{ include('comment/_delete_form.html.twig') }}
+        <button class="btn btn-light mx-2" onclick="window.location.href='{{ path('app_comment_edit', {'id': comment.id}) }}'">Edit</button>
+        <button class="btn btn-light mx-2" onclick="window.location.href='{{ path('app_event_index') }}'">Back to list</button>
+    </div>
+
+    <br/>
+{% endblock %}

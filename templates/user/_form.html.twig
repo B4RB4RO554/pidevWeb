@@ -1,0 +1,40 @@
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    {% set hasErrors = false %}
+
+{% for field in form %}
+    {% if form_errors(field) is not empty %}
+        {% set hasErrors = true %}
+    {% endif %}
+
+    <div class="row">
+        <div class="col-md-6">
+            {% if hasErrors == false %}
+                <div class="input-group input-group-outline my-3">
+                    {{ form_label(field) }}
+                    {{ form_widget(field, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            {% else %}
+                {% if form_errors(field) is not empty %}
+                    <div class="input-group input-group-outline is-invalid my-3">
+                        {{ form_label(field) }}
+                        {{ form_widget(field, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                {% else %}
+                    <div class="input-group input-group-outline is-valid my-3">
+                        {{ form_label(field) }}
+                        {{ form_widget(field, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                {% endif %}
+            {% endif %}
+            {% if form_errors(field) %}
+                <div>
+                    <p class="text-danger">{{ form_errors(field) }}</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endfor %}
+
+<button class="btn btn-success">{{ button_label|default('Save') }}</button>
+
+{{ form_end(form) }}

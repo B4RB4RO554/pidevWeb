@@ -1,0 +1,34 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Categoriecodepromo{% endblock %}
+
+{% block body %}
+    <h1>Categoriecodepromo</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ categoriecodepromo.id }}</td>
+            </tr>
+            <tr>
+                <th>Pourcentage</th>
+                <td>{{ categoriecodepromo.pourcentage }}</td>
+            </tr>
+            <tr>
+                <th>Cle</th>
+                <td>{{ categoriecodepromo.cle }}</td>
+            </tr>
+            <tr>
+                <th>Quantite</th>
+                <td>{{ categoriecodepromo.quantite }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_categoriecodepromo_index') }}">back to list</a>
+
+    <a href="{{ path('app_categoriecodepromo_edit', {'id': categoriecodepromo.id}) }}">edit</a>
+
+    {{ include('categoriecodepromo/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'baseAl.html.twig' %}
+
+
+
+{% block child %}
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#" style="color: #2c4d43";>Event</a>
+    </nav>
+
+
+
+    <div class="row d-flex justify-content-center">
+    <div class="card" style="width: 57rem;background-color: #f0f2f5;">
+
+        <div class="card-body">
+            <h3 class="card-title" style="color: #2c4d43">{{ event.title }}</h3>
+            <p class="card-text">{{ event.description }}</p>
+        </div>
+        <ul class="list-group list-group-light list-group-small">
+            <li class="list-group-item px-4">Date de debut  :  {{ event.datedebut ? event.datedebut|date('Y-m-d') : '' }}</li>
+            <li class="list-group-item px-4">Date de fin  :  {{ event.datefin ? event.datefin|date('Y-m-d') : '' }}</li>
+
+        </ul>
+        <div class="card-body">
+            <button class="btn btn-light" onclick="window.location.href='{{ path('app_event_edit', {'id': event.id}) }}'">Edit</button>
+            <button class="btn btn-light" onclick="window.location.href='{{ path('app_comment_new',{'id': event.id}) }}'">+ Add comment</button>
+        </div>
+    </div>
+    <div/>
+
+    <div class="text-center"><h5><p></p></h5><div/>
+
+
+    <div class="row d-flex justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow-0 border" style="background-color: #f0f2f5;">
+            <div class="card-body p-4">
+                <!--<div class="form-outline mb-4">
+                    <input type="text" id="text" class="form-control" placeholder="Type comment..." />
+
+                </div>-->
+                <div class="text-align-left"><h5><p>comments :</p></h5><div/>
+
+                    <div class="card mb-4">
+                        <div class="card-body">
+
+
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex flex-row align-items-center">
+
+                                    <p class="small mb-0 ms-2">{% for comment in event.getComments() %}
+                                    <td>{{ comment.getText() }} </td>
+                                    <td><button class="btn btn-light" onclick="window.location.href='{{ path('app_comment_show', {'id': comment.getId()}) }}'">Show</button></td>
+                                    <br/>
+                                    {% endfor %}</p>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br/>
+
+    <button class="btn btn-light" onclick="window.location.href='{{ path('app_event_index') }}'">Back to list</button>
+    <br/>
+
+    <br/>
+
+{% endblock %}

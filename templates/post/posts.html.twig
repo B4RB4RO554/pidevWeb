@@ -1,0 +1,68 @@
+{% extends 'frontoffice.html.twig' %}
+
+{% block title %}Posts {{ page }} / {{ totalPages }}
+{% endblock %}
+
+{% block body %}
+	<div class="d-flex flex-row-reverse">
+		<a href="{{ path('app_post_new') }}" class="genric-btn info circle text-end">Create new</a>
+	</div>
+	<hr>
+	<div class="row justify-content-center">
+		{% for post in posts %}
+			<div class="col-8 single-exhibition justify-content-center">
+				<div class="thumb">
+					<img class="img-fluid" src="{{ asset('' ~ post.image) }}" alt="Post Image">
+				</div>
+				<p class="date text-disabled font-weight-light">{{post.timestamp|date('Y-m-d H:i:s')}}</p>
+				<h4 class="font-weight-normal">
+					{{post.contenu}}
+				</h4>
+				<div class="meta-bottom d-flex justify-content-end">
+					{% if post.author.id == current_user %}
+						<a href="{{ path('app_post_edit', {'id': post.id}) }}" class="m-2 genric-btn primary">Edit</a>
+						<a href="{{ path('app_post_delete', {'id': post.id}) }}" class="m-2 genric-btn info radius">Delete</a>
+					{% endif %}
+					<a href="{{ path('app_post_show', {'id': post.id}) }}" class="m-2 genric-btn success">View</a>
+					<a href="{{ path('app_post_like', {'id': post.id}) }}" class="m-2 btn btn-danger">{{post.nbLike}}
+						♥</a>
+				</div>
+				<br>
+				<form action="{{ path('app_post_comment_add', {'id': post.id}) }}" method="POST">
+					<div class="d-flex">
+						<input type="text" name="comment" placeholder="Comment" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Comment'" required="" class="border border-dark badge-pill form-control single-input-primary mr-5">
+						<button type="submit" href="#" class="ml-5 genric-btn success circle arrow">Send<span class="lnr lnr-arrow-right"></span>
+						</button>
+					</div>
+				</form>
+				<br>
+				<hr>
+			</div>
+
+
+		{% else %}
+			<h1 class="text-center">No posts found</h1>
+		{% endfor %}
+	</div>
+	<nav aria-label="..." class="row justify-content-center">
+		<ul
+			class="pagination">
+			{# Previous Page Link #}
+			<li class="page-item {% if page == 1 %}disabled{% endif %}">
+				<a class="page-link" href="{{ path('app_post_list', {'page': page - 1}) }}">Prev</a>
+			</li>
+
+			{# Page Links #}
+			{% for p in 1..totalPages %}
+				<li class="page-item {% if p == page %}active{% endif %}">
+					<a class="page-link" href="{{ path('app_post_list', {'page': p}) }}">{{ p }}</a>
+				</li>
+			{% endfor %}
+
+			{# Next Page Link #}
+			<li class="page-item {% if page == totalPages %}disabled{% endif %}">
+				<a class="page-link" href="{{ path('app_post_list', {'page': page + 1}) }}">Next</a>
+			</li>
+		</ul>
+	</nav>
+{% endblock %}

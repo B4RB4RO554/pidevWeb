@@ -1,0 +1,107 @@
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+{% set hasErrors = false %}
+
+{% if form_errors(form.pourcentage) is not empty or form_errors(form.cle) is not empty  or form_errors(form.quantite) is not empty %}
+    {% set hasErrors = true %}
+{% endif %}
+
+<div>
+    <div class="row">
+        <div class="col-md-6">
+
+                {% if hasErrors == false %}
+                    <div class="input-group input-group-outline my-3">
+                        {{ form_label(form.pourcentage) }}
+                        {{ form_widget(form.pourcentage, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                {% else %}
+                    {% if form_errors(form.pourcentage) is not empty %}
+                        <div class="input-group input-group-outline is-invalid my-3">
+                            {{ form_label(form.pourcentage) }}
+                            {{ form_widget(form.pourcentage, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    {% else %}
+                            <div class="input-group input-group-outline is-valid my-3">
+                                {{ form_label(form.pourcentage) }}
+                                {{ form_widget(form.pourcentage, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                    {% endif %}
+                {% endif %}
+
+        </div>
+    </div>
+</div>
+{% if form_errors(form.pourcentage) %}
+    <div >
+        <p class="text-danger">{{ form_errors(form.pourcentage) }}</p>
+    </div>
+{% endif %}
+
+
+
+{# Render cle field #}
+<div class="row">
+    <div class="col-md-6">
+
+        {% if hasErrors == false %}
+            <div class="input-group input-group-outline my-3">
+                {{ form_label(form.cle) }}
+                {{ form_widget(form.cle, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        {% else %}
+            {% if form_errors(form.cle) is not empty %}
+                <div class="input-group input-group-outline is-invalid my-3">
+                    {{ form_label(form.cle) }}
+                    {{ form_widget(form.cle, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            {% else %}
+                <div class="input-group input-group-outline is-valid my-3">
+                    {{ form_label(form.cle) }}
+                    {{ form_widget(form.cle, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            {% endif %}
+        {% endif %}
+        {% if form_errors(form.cle) %}
+            <div >
+                <p class="text-danger">{{ form_errors(form.cle) }}</p>
+            </div>
+        {% endif %}
+
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-6">
+
+        {% if hasErrors == false %}
+            <div class="input-group input-group-outline my-3">
+                {{ form_label(form.quantite) }}
+                {{ form_widget(form.quantite, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        {% else %}
+            {% if form_errors(form.quantite) is not empty %}
+                <div class="input-group input-group-outline is-invalid my-3">
+                    {{ form_label(form.quantite) }}
+                    {{ form_widget(form.quantite, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            {% else %}
+                <div class="input-group input-group-outline is-valid my-3">
+                    {{ form_label(form.quantite) }}
+                    {{ form_widget(form.quantite, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            {% endif %}
+        {% endif %}
+
+        {% if form_errors(form.quantite) %}
+            <div >
+                <p class="text-danger">{{ form_errors(form.quantite) }}</p>
+            </div>
+        {% endif %}
+
+    </div>
+</div>
+<button class="btn btn-success">{{ button_label|default('Save') }}</button>
+
+{{ form_end(form) }}

@@ -1,0 +1,24 @@
+{% extends 'frontoffice.html.twig' %}
+
+{% block title %}New Post
+{% endblock %}
+
+{% block body %}
+	<div class="row justify-content-center">
+
+		{{ form_start(form) }}
+		<div class="input-group mb-3">
+			<div class="custom-file">
+				{{ form_widget(form.image, { 'attr': {'class': 'custom-file-input', 'id': 'inputGroupFile01'} }) }}
+				<label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+			</div>
+		</div>
+		<div class="mt-10">
+			{{ form_widget(form.contenu, { 'attr': {'class': 'single-textarea', 'placeholder': 'Message', 'onfocus': 'this.placeholder = \'\'', 'onblur': 'this.placeholder = \'Message\'', 'required': 'required'} }) }}
+		</div>
+        <br>
+		<button type="submit" class="genric-btn primary radius mr-5">Save</button>
+		<a href="{{ path('app_post_list') }}" class="ml-5 genric-btn info radius">back to list</a>
+		{{ form_end(form) }}
+	</form>
+</div>{% endblock %}

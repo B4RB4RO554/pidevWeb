@@ -1,0 +1,65 @@
+{% extends 'baseAl.html.twig' %}
+
+{% block child %}
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#" style="color: #2c4d43;">Events</a>
+        <form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="myInput">
+        </form>
+    </nav>
+    <table class="mx-auto">
+        <tbody id="myTable">
+{% for event in events %}
+
+<tr>
+    <td>
+<div class="row d-flex justify-content-center">
+    <div class="card" style="width: 57rem;background-color: #f0f2f5;margin-bottom: 20px;">
+
+        <div class="card-body">
+
+            <h3 class="card-title" style="color: #2c4d43">{{ event.title }}</h3>
+
+
+
+                            <div style="width: 40%;">
+                                <img src="{{ asset('/uploads/photos/' ~ event.photo) }}" width="100%" height="auto">
+                            </div>
+
+            <p class="card-text">{{ event.description }}</p>
+        </div>
+        <ul class="list-group list-group-light list-group-small">
+            <li class="list-group-item px-4">Date de debut  :  {{ event.datedebut ? event.datedebut|date('Y-m-d') : '' }}</li>
+            <li class="list-group-item px-4">Date de fin  :  {{ event.datefin ? event.datefin|date('Y-m-d') : '' }}</li>
+
+        </ul>
+        <div class="card-body">
+            <button class="btn btn-light" onclick="window.location.href='{{ path('app_event_show', {'id': event.id}) }}'">Show</button>
+            <button class="btn btn-light" onclick="window.location.href='{{ path('app_event_edit', {'id': event.id}) }}'">Edit</button>
+
+        </div>
+    </div>
+
+
+    </div>
+    </td>
+</tr>
+
+
+    {% endfor %}
+     </tbody>
+    </table>
+    <br/>
+
+
+
+    <div class="d-flex justify-content-center">
+        <button class="btn btn-light" onclick="window.location.href='{{ path('app_event_new') }}'">+ New event</button>
+    </div>
+    <br/>
+    <div class="d-flex justify-content-center">
+        <button class="btn btn-success" onclick="window.location.href='{{ path('app_eventPDF') }}'">Print</button>
+    </div>
+
+
+{% endblock %}

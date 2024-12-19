@@ -1,0 +1,13 @@
+{% extends 'baseAl.html.twig' %}
+
+{% block title %}New Event{% endblock %}
+
+{% block child %}
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#" style="color: #2c4d43";>Add event</a>
+    </nav>
+<br/>
+    {{ include('event/_form.html.twig') }}
+
+    <button class="btn btn-light" onclick="window.location.href='{{ path('app_event_index') }}'">Back to list</button>
+{% endblock %}

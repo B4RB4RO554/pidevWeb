@@ -1,0 +1,11 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Genrate Code Promo{% endblock %}
+
+{% block body %}
+    <h1>Genrate Code Promo</h1>
+
+    {{ include('categoriecodepromo/_form.html.twig') }}
+
+    <a href="{{ path('app_categoriecodepromo_index') }}">back to list</a>
+{% endblock %}

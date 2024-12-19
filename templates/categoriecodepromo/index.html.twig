@@ -1,0 +1,120 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Categoriecodepromo index{% endblock %}
+
+{% block body %}
+
+    <a href="{{ path('app_categoriecodepromo_new') }}" class="btn bg-gradient-success">Create new</a>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card my-4">
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                    <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                        <h6 class="text-white text-capitalize ps-3">Projects table</h6>
+                    </div>
+                </div>
+                <div class="card-body px-0 pb-2">
+                    <div class="table-responsive p-0">
+                        <table class="table align-items-center justify-content-center mb-0">
+                            <thead>
+
+                            <tr>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Code</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Quantité</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Code</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Pourcentage</th>
+                                <th> Actions </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for categoriecodepromo in categoriecodepromos %}
+                            <tr>
+                                <td>
+                                    <div class="d-flex px-2">
+                                        <div>
+                                            <img src="{{ asset('assets-back/img/small-logos/logo-asana.svg') }}" class="avatar avatar-sm rounded-circle me-2" alt="spotify">
+                                        </div>
+                                        <div class="my-auto">
+                                            <h6 class="mb-0 text-sm">Code Promo {{ categoriecodepromo.id }}</h6>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p class="text-sm font-weight-bold mb-0">{{ categoriecodepromo.quantite }}</p>
+                                </td>
+                                <td>
+                                    <span class="text-xs font-weight-bold">{{ categoriecodepromo.cle }}</span>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <span class="me-2 text-xs font-weight-bold">{{ categoriecodepromo.pourcentage }} %</span>
+                                        <div>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="{{ categoriecodepromo.pourcentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ categoriecodepromo.pourcentage }}%;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="align-middle">
+                                    <button class="btn bg-gradient-warning">
+                                        <a href="{{ path('app_categoriecodepromo_edit', {'id': categoriecodepromo.id}) }}">edit</a>
+                                    </button>
+
+                                    <form action="{{ path('app_categoriecodepromo_delete', {'id': categoriecodepromo.id}) }}" method="post">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ categoriecodepromo.id) }}">
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+
+                                </td>
+                            </tr>
+                            {% else %}
+                                        <tr>
+                                            <td colspan="5">no records found</td>
+                                        </tr>
+                                    {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{#    <h1>Categoriecodepromo index</h1>#}
+
+{#    <table class="table">#}
+{#        <thead>#}
+{#            <tr>#}
+{#                <th>Id</th>#}
+{#                <th>Pourcentage</th>#}
+{#                <th>Cle</th>#}
+{#                <th>Quantite</th>#}
+{#                <th>actions</th>#}
+{#            </tr>#}
+{#        </thead>#}
+{#        <tbody>#}
+{#        {% for categoriecodepromo in categoriecodepromos %}#}
+{#            <tr>#}
+{#                <td>{{ categoriecodepromo.id }}</td>#}
+{#                <td>{{ categoriecodepromo.pourcentage }}</td>#}
+{#                <td>{{ categoriecodepromo.cle }}</td>#}
+{#                <td>{{ categoriecodepromo.quantite }}</td>#}
+{#                <td>#}
+{#                    <a href="{{ path('app_categoriecodepromo_show', {'id': categoriecodepromo.id}) }}">show</a>#}
+{#                    <a href="{{ path('app_categoriecodepromo_edit', {'id': categoriecodepromo.id}) }}">edit</a>#}
+{#                </td>#}
+{#            </tr>#}
+{#        {% else %}#}
+{#            <tr>#}
+{#                <td colspan="5">no records found</td>#}
+{#            </tr>#}
+{#        {% endfor %}#}
+{#        </tbody>#}
+{#    </table>#}
+
+{#    <a href="{{ path('app_categoriecodepromo_new') }}">Create new</a>#}
+{% endblock %}

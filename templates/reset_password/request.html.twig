@@ -1,0 +1,98 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Reset your password{% endblock %}
+{% block navbar %}
+<body style="background-image: url('https://images.unsplash.com/photo-1572947650440-e8a97ef053b2?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); background-size: cover;">
+
+<div class="container position-sticky z-index-sticky top-0">
+    <div class="row">
+        <div class="col-12">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg blur border-radius-xl top-0 z-index-3 shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
+                <div class="container-fluid ps-2 pe-0">
+                    <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 " href="#">
+                        Art Galleriy
+                    </a>
+                    <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon mt-2">
+                <span class="navbar-toggler-bar bar1"></span>
+                <span class="navbar-toggler-bar bar2"></span>
+                <span class="navbar-toggler-bar bar3"></span>
+              </span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navigation">
+                        <ul class="navbar-nav mx-auto">
+                           
+                            <li class="nav-item">
+                                <a class="nav-link me-2" href="{{ path('app_register') }}">
+                                    <i class="fas fa-user-circle opacity-6 text-dark me-1"></i>
+                                    Sign Up
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link me-2" href="{{ path('app_login') }}">
+                                    <i class="fas fa-key opacity-6 text-dark me-1"></i>
+                                    Sign In
+                                </a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </nav>
+            <!-- End Navbar -->
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block body %}
+<main class="main-content mt-6" >
+    <section >
+        <div class="page-header min-vh-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 start-0 text-center justify-content-center flex-column">
+                        <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center" style="background-image: url(''); background-size: cover;">
+                        </div>
+                    </div>
+                    <div class="col-l-6 col-lg-5 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5">
+                        <div class="card card-plain" style="background-color: aliceblue;">
+                            <div class="card-header">
+                                <center><h4>Reset your password</h4></center>
+                             
+                            </div>
+                            <div class="card-body">
+
+{% for flash_error in app.flashes('reset_password_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+    
+
+    {{ form_start(requestForm) }}
+      
+         <div class="input-group input-group-outline mb-3">
+                                 
+                                    {{ form_widget(requestForm.email, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                    {% if form_errors(requestForm.email) %}
+                                        <div class="text-danger">{{ form_errors(requestForm.email) }}</div>
+                                    {% endif %}
+        <div>
+            <small>
+                Enter your email address, and we will send you a
+                link to reset your password.
+            </small>
+        </div><br>
+
+       <center> <button class="btn btn-primary">Send password reset email</button></center>
+    {{ form_end(requestForm) }}
+                               
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+{% endblock %}

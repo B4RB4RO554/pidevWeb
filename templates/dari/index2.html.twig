@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Event{% endblock %}
+
+{% block body %}
+    <h1>Event</h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ event.id }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ event.description }}</td>
+        </tr>
+        <tr>
+            <th>Datedebut</th>
+            <td>{{ event.datedebut ? event.datedebut|date('Y-m-d') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Datefin</th>
+            <td>{{ event.datefin ? event.datefin|date('Y-m-d') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Title</th>
+            <td>{{ event.title }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h3><th>comments</th></h3>
+    <br/>
+
+
+    {% for comment in event.getComments() %}
+        <td>{{ comment.getText() }}</td>
+        <br/>
+    {% endfor %}
+    <br/>
+    <a href="{{ path('app_comment_new') }}" class="btn btn-primary">add comment</a>
+
+
+
+
+{% endblock %}
